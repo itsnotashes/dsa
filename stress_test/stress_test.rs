@@ -3,7 +3,7 @@
 fn main(){
     let mut x: f32 = 0.0;
     while x < 0.1 {
-        println!("Random text");
+        println!("Random_text");
         x += 0.01;
     }
 }
