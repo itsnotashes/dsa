@@ -58,9 +58,66 @@ void construct(int *arr, int n) {
     }
 }
 
+// Delete a node from the tree
+void delete(int data) {
+    node *temp = root;
+    node *parent = NULL;
+    while (temp != NULL) {
+        if (temp->data == data) {
+            if (temp->left == NULL && temp->right == NULL) {
+                if (parent->left == temp) {
+                    parent->left = NULL;
+                } else {
+                    parent->right = NULL;
+                }
+                free(temp);
+            } else if (temp->left == NULL) {
+                if (parent->left == temp) {
+                    parent->left = temp->right;
+                } else {
+                    parent->right = temp->right;
+                }
+                free(temp);
+            } else if (temp->right == NULL) {
+                if (parent->left == temp) {
+                    parent->left = temp->left;
+                } else {
+                    parent->right = temp->left;
+                }
+                free(temp);
+            } else {
+                node *temp1 = temp->right;
+                node *parent1 = temp;
+                while (temp1->left != NULL) {
+                    parent1 = temp1;
+                    temp1 = temp1->left;
+                }
+                temp->data = temp1->data;
+                if (parent1->left == temp1) {
+                    parent1->left = temp1->right;
+                } else {
+                    parent1->right = temp1->right;
+                }
+                free(temp1);
+            }
+            break;
+        } else if (data < temp->data) {
+            parent = temp;
+            temp = temp->left;
+        } else {
+            parent = temp;
+            temp = temp->right;
+        }
+    }
+}
+
+
 void main() {
     int arr[] = { 5, 3, 7, 1, 4, 6, 8, 87, 49, 23, 12, 34, 56, 78, 90 };
     int n = sizeof(arr) / sizeof(arr[0]);
     construct(arr, n);
+    print(root);
+    delete(5);
+    printf("\n");
     print(root);
 }
