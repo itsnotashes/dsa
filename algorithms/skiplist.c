@@ -11,7 +11,7 @@ struct node * next10;
 typedef struct node Node;
 
 
-void print_skipped_list_(Node * head){
+void print_skipped_list(Node * head){
     Node * current = head;
     while(current!=NULL){
         if (current->next==NULL){
@@ -92,7 +92,7 @@ int main( ){
 
     Node * head = arrayToSkipList(a,n);
     printf("Normal Linked List: ");
-    print_skipped_list_(head);
+    print_skipped_list(head);
     printf("Linked List with 5 skips: ");
     print_skipped_list_5(head);
     printf("Linked List with 10 skips: ");
